@@ -3,21 +3,51 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("canvas-container").appendChild(renderer.domElement);
-let rotateMeshes = false;
+
+
+
+let rotateMeshes = True;
 const rotationButton = document.getElementById("rotationButton");
 let wireframeMeshes = false;
 
-const geometry = new THREE.BoxGeometry(2, 2, 2);
-const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
-material.receiveShadow = true;
-material.castShadow = true;
 
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+// 
+// const geometry = new THREE.BoxGeometry(2, 2, 2);
+// const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+// material.receiveShadow = true;
+// material.castShadow = true;
+
+// const cube = new THREE.Mesh(geometry, material);
+// scene.add(cube);
+// camera.position.z = 5;
+// camera.position.y = 3;
+
+
+const loader = new THREE.STLLoader();
+const geometry = loader.parse("hyt_after-occlusion.stl");
+geometry.rotateX(-Math.PI / 2);
+
+const bbox = new THREE.Box3().setFromObject(new THREE.Mesh(geometry));
+const bboxcenter = bbox.getCenter(new THREE.Vector3());
+geometry.translate(-bboxcenter.x, -bboxcenter.y, -bboxcenter.z);
+
+const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+if (wireframeMeshes) {
+    material.wireframe = true
+}
+const mesh = new THREE.Mesh(geometry, material);
+mesh.name = 'userMesh';
+
+if (transformControls && transformControls.object) {
+    transformControls.detach(transformControls.object);
+}
+
+scene.add(mesh);
 camera.position.z = 5;
 camera.position.y = 3;
+// 
 
-console.log('Follow me on Twitter! https://twitter.com/AndrewASink')
+
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // Initialize TransformControls
