@@ -6,7 +6,7 @@ document.getElementById("canvas-container").appendChild(renderer.domElement);
 
 
 
-let rotateMeshes = True;
+let rotateMeshes = true;
 const rotationButton = document.getElementById("rotationButton");
 let wireframeMeshes = false;
 
