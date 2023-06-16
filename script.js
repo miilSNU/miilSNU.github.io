@@ -12,26 +12,26 @@ let wireframeMeshes = false;
 
 
 // 
-// const geometry = new THREE.BoxGeometry(2, 2, 2);
-// const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
-// material.receiveShadow = true;
-// material.castShadow = true;
+const geometry = new THREE.BoxGeometry(2, 2, 2);
+const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+material.receiveShadow = true;
+material.castShadow = true;
 
-// const cube = new THREE.Mesh(geometry, material);
-// scene.add(cube);
-// camera.position.z = 5;
-// camera.position.y = 3;
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+camera.position.z = 5;
+camera.position.y = 3;
 
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-const loader = new GLTFLoader();
-loader.load('hyt_after-occlusion.stl', function ( gltf ) {
+// import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+// const loader = new GLTFLoader();
+// loader.load('hyt_after-occlusion.stl', function ( gltf ) {
 
-	scene.add( gltf.scene );
+// 	scene.add( gltf.scene );
 
-}, undefined, function ( error ) {
+// }, undefined, function ( error ) {
 
-	console.error( error );
-} );
+// 	console.error( error );
+// } );
 // const loader = new THREE.STLLoader();
 // const geometry = loader.parse("hyt_after-occlusion.stl");
 // geometry.rotateX(-Math.PI / 2);
