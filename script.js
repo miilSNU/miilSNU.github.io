@@ -22,29 +22,38 @@ let wireframeMeshes = false;
 // camera.position.z = 5;
 // camera.position.y = 3;
 
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+const loader = new GLTFLoader();
+loader.load('hyt_after-occlusion.stl', function ( gltf ) {
 
-const loader = new THREE.STLLoader();
-const geometry = loader.parse("hyt_after-occlusion.stl");
-geometry.rotateX(-Math.PI / 2);
+	scene.add( gltf.scene );
 
-const bbox = new THREE.Box3().setFromObject(new THREE.Mesh(geometry));
-const bboxcenter = bbox.getCenter(new THREE.Vector3());
-geometry.translate(-bboxcenter.x, -bboxcenter.y, -bboxcenter.z);
+}, undefined, function ( error ) {
 
-const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
-if (wireframeMeshes) {
-    material.wireframe = true
-}
-const mesh = new THREE.Mesh(geometry, material);
-mesh.name = 'userMesh';
+	console.error( error );
+} );
+// const loader = new THREE.STLLoader();
+// const geometry = loader.parse("hyt_after-occlusion.stl");
+// geometry.rotateX(-Math.PI / 2);
 
-if (transformControls && transformControls.object) {
-    transformControls.detach(transformControls.object);
-}
+// const bbox = new THREE.Box3().setFromObject(new THREE.Mesh(geometry));
+// const bboxcenter = bbox.getCenter(new THREE.Vector3());
+// geometry.translate(-bboxcenter.x, -bboxcenter.y, -bboxcenter.z);
 
-scene.add(mesh);
-camera.position.z = 5;
-camera.position.y = 3;
+// const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+// if (wireframeMeshes) {
+//     material.wireframe = true
+// }
+// const mesh = new THREE.Mesh(geometry, material);
+// mesh.name = 'userMesh';
+
+// if (transformControls && transformControls.object) {
+//     transformControls.detach(transformControls.object);
+// }
+
+// scene.add(mesh);
+// camera.position.z = 5;
+// camera.position.y = 3;
 // 
 
 
